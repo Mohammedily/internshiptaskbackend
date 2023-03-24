@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/user");
-const blogRouter = require("./routes/blog");
+const bookRouter = require("./routes/book");
 
 
 dotenv.config();
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(userRouter);
-app.use(blogRouter)
+app.use(bookRouter)
 
 
 const PORT = process.env.PORT;
