@@ -86,7 +86,7 @@ bookRouter.get("/books/:id", async(req, res) => {
 
 
 
-bookRouter.delete("/blog/:id", async(req, res) => {
+bookRouter.delete("/books/:id", async(req, res) => {
     
     const id = req.params.id
 
@@ -100,5 +100,25 @@ bookRouter.delete("/blog/:id", async(req, res) => {
     return res.status(201).json({ message:"Book Delete Successfully", book })
 
 });
+
+bookRouter.get("/books", async(req, res) => {
+    const {page, limit} = req.query;
+
+    const skip = (page - 1) * 10;
+
+    console.log(skip, limit)
+
+    let books;
+
+    try {
+        books = await Book.find().skip(skip).limit(limit);
+    } catch (error) {
+        console.log(error);
+       return res.status(500).json({message:"Network Error"}) 
+    };
+
+    return res.status(201).json({ books })
+
+})
 
 module.exports = bookRouter;
